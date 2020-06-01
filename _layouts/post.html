@@ -35,6 +35,25 @@ layout: default
     {{ content }}
   </div>
 
+  {% if page.changelog %}
+    <h2>Changelog</h2>
+    {%- assign changelog = page.changelog | sort: "date" -%}
+    <p>
+      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+        {{ page.date | date: date_format }}
+      </time> -
+      Published
+    </p>
+    {% for change in changelog %}
+      <p>
+        <time class="dt-modified" datetime="{{ change.date | date_to_xmlschema }}" itemprop="dateModified">
+          {{ change.date | date: date_format }}
+        </time> -
+        {{ change.reason }}
+      </p>
+    {% endfor %}
+  {% endif %}
+
   {%- if site.disqus.shortname -%}
     {%- include disqus_comments.html -%}
   {%- endif -%}
