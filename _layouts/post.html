@@ -10,11 +10,11 @@ layout: default
       <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
         {{ page.date | date: date_format }}
       </time>
-      {%- if page.modified_date -%}
+      {%- if page.changelog -%}
         ~
-        {%- assign mdate = page.modified_date | date_to_xmlschema -%}
+        {%- assign last_post = page.changelog | sort: "date" | last -%}
         <time class="dt-modified" datetime="{{ mdate }}" itemprop="dateModified">
-          {{ mdate | date: date_format }}
+          {{ last_post.date | date_to_xmlschema | date: date_format }}
         </time>
       {%- endif -%}
       {%- if page.author -%}
