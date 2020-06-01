@@ -25,8 +25,9 @@ layout: default
         {% endfor %}
       {%- endif -%}
       {% if page.tags.size > 0 %}
-        {%- assign tags = page.tags -%}
-        | {% include post-tags.html %}
+        <span class="post-tags">| {% if page.tags.size == 1 %}Tag: {% else %}Tags: {% endif %}
+          {{ page.tags | sort | array_to_sentence_string }}
+        </span>
       {% endif %}
     </p>
   </header>

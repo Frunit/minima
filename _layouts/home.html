@@ -28,8 +28,9 @@ layout: default
         <span class="post-meta">
           {{ post.date | date: date_format }}
             {% if post.tags.size > 0 %}
-              {%- assign tags = post.tags -%}
-              | {% include post-tags.html %}
+              <span class="post-tags">| {% if post.tags.size == 1 %}Tag: {% else %}Tags: {% endif %}
+                {{ post.tags | sort | array_to_sentence_string }}
+              </span>
             {% endif %}
         </span>
         <h3>
