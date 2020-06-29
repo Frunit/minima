@@ -12,9 +12,8 @@ layout: default
       </time>
       {%- if page.changelog -%}
         ~
-        {%- assign last_post = page.changelog | sort: "date" | last -%}
         <time class="dt-modified" datetime="{{ mdate }}" itemprop="dateModified">
-          {{ last_post.date | date_to_xmlschema | date: date_format }}
+          {{ page.changelog.last.date | date_to_xmlschema | date: date_format }}
         </time>
       {%- endif -%}
       {%- if page.author -%}
@@ -38,14 +37,13 @@ layout: default
 
   {% if page.changelog %}
     <h2>Changelog</h2>
-    {%- assign changelog = page.changelog | sort: "date" -%}
     <p>
       <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
         {{ page.date | date: date_format }}
       </time> -
       Published
     </p>
-    {% for change in changelog %}
+    {% for change in page.changelog %}
       <p>
         <time class="dt-modified" datetime="{{ change.date | date_to_xmlschema }}" itemprop="dateModified">
           {{ change.date | date: date_format }}
